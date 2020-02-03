@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My @Constants.ApplicationName Application</title>
+    @Styles.Render("~/loginlayout/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body data-ng-app="loginApp">
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink(@Constants.ApplicationName, "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Users", "List", "User")</li>
+                </ul>
+                <ul class="nav navbar-nav pull-right">
+                    <li>@Html.ActionLink("Login", "Login", "Security")</li>
+                    <li>@Html.ActionLink("Register", "Registration", "Security")</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My @Constants.ApplicationName Application</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/loginlayout/js")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,64 @@
+﻿@model Architecture.Generic.Models.ViewModel.SearchUserModel
+@{
+    ViewBag.Title = "User List";
+}
+@Html.Hidden("SearchUserModel", Common.SerializeObject(Model))
+<div data-ng-controller="UserListController">
+    <div class="row">
+        <div class="col-md-4">
+            <h2>User List</h2>
+            <table class="table table-striped table-responsive-md mb-0">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>
+                            <a class="text-nowrap" href="javascript:void(0);" data-ng-click="UserListPager.sortColumn('FullName')">FullName</a>
+                            <span class="sortorder" data-ng-show="UserListPager.sortIndex === 'FullName'" data-ng-class="{reverse:UserListPager.FullName}"></span>
+                        </th>
+                        <th>
+                            <a class="text-nowrap" href="javascript:void(0);" data-ng-click="UserListPager.sortColumn('Email')">Email</a>
+                            <span class="sortorder" data-ng-show="UserListPager.sortIndex === 'Email'" data-ng-class="{reverse:UserListPager.Email}"></span>
+                        </th>
+                        <th>
+                            <a class="text-nowrap" href="javascript:void(0);" data-ng-click="UserListPager.sortColumn('Gender')">Gender</a>
+                            <span class="sortorder" data-ng-show="UserListPager.sortIndex === 'Gender'" data-ng-class="{reverse:UserListPager.Gender}"></span>
+                        </th>
+                        <th>
+                            <a class="text-nowrap" href="javascript:void(0);" data-ng-click="UserListPager.sortColumn('Country')">Country</a>
+                            <span class="sortorder" data-ng-show="UserListPager.sortIndex === 'Country'" data-ng-class="{reverse:UserListPager.Country}"></span>
+                        </th>
+                        <th>
+                            Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr dir-paginate="data in UserList | itemsPerPage: UserListPager.pageSize" total-items="UserListPager.totalRecords" current-page="UserListPager.currentPage" pagination-id="UserListPagerId">
+                        <td ng-class="{'info-disabled':!data.IsActive}">
+                            {{$index}}
+                        </td>
+                        <td ng-class="{'info-disabled':!data.IsActive}">
+                            {{data.FullName}}
+                        </td>
+                        <td ng-class="{'info-disabled':!data.IsActive}">
+                            {{data.Email}}
+                        </td>
+                        <td ng-class="{'info-disabled':!data.IsActive}">
+                            {{data.Gender}}
+                        </td>
+                        <td ng-class="{'info-disabled':!data.IsActive}">
+                            {{data.Country}}
+                        </td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="kt-datatable__pager kt-datatable--paging-loaded">
+                <dir-pagination-controls boundary-links="true" on-page-change="UserListPager.pageChanged(newPageNumber)" pagination-id="UserListPagerId"></dir-pagination-controls>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    @Scripts.Render("~/user/userlistjs")
+}

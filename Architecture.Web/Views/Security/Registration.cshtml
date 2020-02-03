@@ -1,0 +1,41 @@
+﻿@model Architecture.Generic.Models.ViewModel.RegistrationModel
+@{
+    ViewBag.Title = "Registraion";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+@Html.Hidden("SignUpModel", Common.SerializeObject(Model))
+<div class="row" data-ng-controller="RegistrationController">
+    <h2>@ViewBag.Title</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <form class="" id="frmRegistraion">
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.FirstName, new { data_ng_model = "SignUpModel.FirstName", placeholder = "First Name", @class = "form-control", maxlength = 20, name = "FirstName" })
+                    @Html.ValidationMessageFor(m => m.FirstName)
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.LastName, new { data_ng_model = "SignUpModel.LastName", placeholder = "Last Name", @class = "form-control", maxlength = 20, name = "LastName" })
+                    @Html.ValidationMessageFor(m => m.LastName)
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.Email, new { data_ng_model = "SignUpModel.Email", placeholder = "Email", @class = "form-control", maxlength = 128, name = "Email" })
+                    @Html.ValidationMessageFor(m => m.Email)
+                </div>
+                <div class="form-group">
+                    @Html.PasswordFor(m => m.Password, new { data_ng_model = "SignUpModel.Password", placeholder = "Password", @class = "form-control", maxlength = 20, name = "Password", autocomplete = "off" })
+                    @Html.ValidationMessageFor(m => m.Password)
+                </div>
+                <div class="form-group">
+                    @Html.PasswordFor(m => m.ConfirmPassword, new { data_ng_model = "SignUpModel.ConfirmPassword", placeholder = "Confirm Password", @class = "form-control", maxlength = 20, name = "ConfirmPassword", autocomplete = "off" })
+                    @Html.ValidationMessageFor(m => m.ConfirmPassword)
+                </div>
+                <div>
+                    <button type="submit" data-ng-click="SignUp()" class="btn btn-primary">Sign Up</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+    @section scripts{
+        @Scripts.Render("~/security/signupjs")
+    }
